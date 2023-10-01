@@ -16,22 +16,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xffADC6FF))
       ),
-      home: const MyHomePage(title: 'Hello 3º DAM - PGL'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> { 
-  int _counter = 20;
+  int _counter = 0;
 
   void _decreaseCounter() {
     setState(() {
@@ -58,27 +56,59 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         foregroundColor: Colors.black,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: const Text("Hello 3º DAM - PGL"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Starred:',
+            Container(
+              margin: const EdgeInsets.only(bottom: 60.0),
+              child: 
+                SizedBox(
+                  height: 200,
+                  child:
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Starred:",
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        Text(
+                          "$_counter",
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        const Icon(Icons.star, color: Colors.yellow, size: 60,)
+                      ]
+                    )
+                )
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const Icon(Icons.star, color: Colors.yellow),
-            ElevatedButton(
-              onPressed: _decreaseCounter, 
-              child: const Icon(Icons.thumb_down)
-            ),
-            ElevatedButton(
-              onPressed: _increaseCounter, 
-              child: const Icon(Icons.thumb_up)
+            SizedBox(
+              width: 200,
+              child:
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: 
+                  [
+                    MaterialButton(
+                      onPressed: _decreaseCounter, 
+                      color: const Color(0xffF2F2FC),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Icon(Icons.thumb_down, color: Color(0xff0259C2))
+                    ),
+                    MaterialButton(
+                      onPressed: _increaseCounter, 
+                      color: const Color(0xffF2F2FC),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Icon(Icons.thumb_up, color: Color(0xff0259C2))
+                    )
+                  ]
+                )
             )
           ],
         ),
